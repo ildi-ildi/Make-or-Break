@@ -1,0 +1,19 @@
+{
+  "name": "make-or-break",
+  "version": "1.0.0",
+  "description": "make or break package json",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ildi-ildi/Make-or-Break.git"
+  },
+  "author": "Ildi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ildi-ildi/Make-or-Break/issues"
+  },
+  "homepage": "https://github.com/ildi-ildi/Make-or-Break#readme"
+}
