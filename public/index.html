@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="habit-app.js"></script>
+</head>
+
+<body>
+
+<div data-role="page">
+    <div data-role="header">
+        <h1>Text Inputs</h1>
+    </div>
+
+    <div data-role="main" class="ui-content">
+
+        <form method="post">
+
+            <div class="ui-field-contain">
+
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name">
+
+                <label for="des">Description:</label>
+                <input type="text" name="des" id="des">
+
+                <label for="colour">Colour:</label>
+                <input type="text" name="colour" id="colour">
+
+            </div>
+            <input type="submit" data-inline="true" value="Submit">
+        </form>
+
+        <table data-role="table" class="ui-responsive ui-shadow" id="myTable">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Colour</th>
+            </tr>
+            </thead>
+
+            <tbody id="habitfill">
+
+        </table>
+
+    </div>
+</div>
+
+</body>
+
+</html>
