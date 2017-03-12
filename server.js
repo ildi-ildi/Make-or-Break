@@ -19,7 +19,7 @@ app.get('/api/habit', function(req, res) { // app.get - reading
             throw err;
         console.log(err, habits);
         res.status(200);
-        res.json( { habits: habits });
+        res.json( { habits: habits }); // in format json
     });
 });
 
