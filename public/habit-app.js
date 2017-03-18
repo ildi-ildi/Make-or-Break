@@ -8,6 +8,7 @@ $(document).ready(function() {
 
     $('form').submit(function (event) {
         event.preventDefault();
+        
         $.post('/api/habit', {
             name: $('#name').val(), // gets the value from the id
             description: $('#desc').val(),
@@ -22,41 +23,54 @@ $(document).ready(function() {
 
 });
 
-
 function getHabit(){
     $.getJSON( "/api/habit", function( data ) {
-        $('#habitfill').html('');
-        $.each(data.habits, function(idx, habit){
-            $('#habitfill').append('<tr data-habit="'+habit._id+'">' +
-                '<td>' + habit.name + '</td>' +
-                '<td>' + habit.description+ '</td>' +
-                '<td>' + habit.colour + '</td>' +
-                '<td><button id="delete-button">Delete</button></td>' +
-                '<td><input type="button" value="Edit" id="edit"></td>' +
-                '</tr>');
-            //data-habit="'+habit._id+  -- gets the id of the row
+        var tableBody = $('#habitfill');
+        tableBody.empty();
+        
+        $.each(data.habits, function(idx, habit) {
+            var tableRow = $('<tr id="' + habit._id + '"></tr>').appendTo(tableBody);
+            $('<td>' + habit.name + '</td>').appendTo(tableRow);
+            $('<td>' + habit.description + '</td>').appendTo(tableRow);
+            $('<td>' + habit.colour + '</td>').appendTo(tableRow);
+                        
+            var btnDeleteColumn = $('<td><button>Delete</button></td>').appendTo(tableRow);
+            btnDeleteColumn.find('button').click({ id: habit._id }, deleteHabit);
+            
+            var btnEditColumn = $('<td><input type="button" value="Edit" id="edit"></td>').appendTo(tableRow);
+            btnEditColumn.find('input').click({ habit: habit }, editHabit);
         });
-        $('#delete-button').off('click').on('click', deleteHabit); //off click -preventing the button to be pressed // on click, call the function deleteHabit
-        $('#edit').off('click').on('click',updateHabit);
     });
 }
+
 function deleteHabit(event) {
         event.preventDefault();
-        var id = $(event.target).parent().parent().attr('data-habit'); // event.target - where we clicked on // parent(). to go to <tr> //parent(). to go to <td> // .attr - geting the info from data-habit
+
         $.ajax({ // same like post and get - add more functions
             method: "DELETE",
             url: "/api/habit",
-            data: { id: id }
-        })
-            .done(function( msg ) { //auto update table when row is deleted
-                getHabit();
-            });
+            data: { id: event.data.id }
+        }).done(function( msg ) { //auto update table when row is deleted
+            $('#' + event.data.id).remove(); 
+        });
+}
+
+function editHabit(event) {
+    // fill input box
+    //$('#name').html(event.data.habit.name);
+    // ...
+    
+    // make submit button invisible
+    // make update button visible
+    
+    //$('#update').click({ id: event.data.habit._id }, updateHabit);
 }
 
 function updateHabit(event) {
     event.preventDefault();
 
+    var id = event.data.id;
+    $('#name').val();
 
-
-
+    
 }
