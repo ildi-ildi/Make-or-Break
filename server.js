@@ -42,6 +42,16 @@ app.delete('/api/habit',function(req,res){
     });
 });
 
+app.put('/api/habit',function(req,res){
+    Habit.findOneAndUpdate({_id: req.body.id,
+                             name: req.body.name,
+                             description: req.body.description,
+                             colour: req.body.colour},function(err,habits){
+                                                    if(err) throw err;
+        res.send();
+    });
+});
+
 mongoose.connect('mongodb://localhost/habitdb').then(function () {
     app.listen(8080);
 }).catch(function (err) {

@@ -14,20 +14,30 @@ $(document).ready(function() {
             colour: $('#colour').val(),
         }, function () {
             getHabit();
+            name: $('#name').val('');
+            description: $('#desc').val('');
+            colour: $('#colour').val('');
         })
     })
 
-
 });
+
 
 function getHabit(){
     $.getJSON( "/api/habit", function( data ) {
         $('#habitfill').html('');
         $.each(data.habits, function(idx, habit){
-            $('#habitfill').append('<tr data-habit="'+habit._id+'"><td>' + habit.name + '</td><td>' + habit.description+ '</td><td>' + habit.colour + '</td><td><button>Delete</button></td></tr>');
+            $('#habitfill').append('<tr data-habit="'+habit._id+'">' +
+                '<td>' + habit.name + '</td>' +
+                '<td>' + habit.description+ '</td>' +
+                '<td>' + habit.colour + '</td>' +
+                '<td><button id="delete-button">Delete</button></td>' +
+                '<td><input type="button" value="Edit" id="edit"></td>' +
+                '</tr>');
             //data-habit="'+habit._id+  -- gets the id of the row
         });
-        $('button').off('click').on('click', deleteHabit); //off click -preventing the button to be pressed // on click, call the function deleteHabit
+        $('#delete-button').off('click').on('click', deleteHabit); //off click -preventing the button to be pressed // on click, call the function deleteHabit
+        $('#edit').off('click').on('click',updateHabit);
     });
 }
 function deleteHabit(event) {
@@ -41,4 +51,12 @@ function deleteHabit(event) {
             .done(function( msg ) { //auto update table when row is deleted
                 getHabit();
             });
+}
+
+function updateHabit(event) {
+    event.preventDefault();
+
+
+
+
 }
