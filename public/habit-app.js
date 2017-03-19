@@ -4,7 +4,7 @@
 
 
 $(document).ready(function() {
-    $(function() { $('#update').hide();});
+       $('#btnedit').hide();
 
     getHabit(); // loads everything
 
@@ -66,13 +66,10 @@ function editHabit(event) {
     $('#desc').val(event.data.habit.description);
     $('#colour').val(event.data.habit.colour);
 
-    $(function() {
         // make submit button invisible
         $('#btnsubmit').hide();
         // make update button visible
-        $('#update').show();
-    });
-
+        $('#btnedit').show();
 
     $('#update').click({ id: event.data.habit._id }, updateHabit);
 }
@@ -93,7 +90,12 @@ function updateHabit(event) {
                 colour: $colour,
         }
     }).done(function() {
-       
+        getHabit();
+        $('#btnedit').hide();
+        $('#btnsubmit').show();
+        name: $('#name').val('');
+        description: $('#desc').val('');
+        colour: $('#colour').val('');
         console.log("succes update");
     })
 }
