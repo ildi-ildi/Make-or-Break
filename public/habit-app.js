@@ -4,6 +4,8 @@
 
 
 $(document).ready(function() {
+    $(function() { $('#update').hide();});
+
     getHabit(); // loads everything
 
     $('form').submit(function (event) {
@@ -20,6 +22,7 @@ $(document).ready(function() {
             colour: $('#colour').val('');
         })
     })
+
 
 });
 
@@ -50,7 +53,7 @@ function deleteHabit(event) {
             method: "DELETE",
             url: "/api/habit",
             data: { id: event.data.id }
-        }).done(function( msg ) { //auto update table when row is deleted
+        }).done(function( msg ) { //delete row
             $('#' + event.data.id).remove(); 
         });
 }
@@ -59,18 +62,38 @@ function editHabit(event) {
     // fill input box
     //$('#name').html(event.data.habit.name);
     // ...
-    
-    // make submit button invisible
-    // make update button visible
-    
-    //$('#update').click({ id: event.data.habit._id }, updateHabit);
+    $('#name').val(event.data.habit.name);
+    $('#desc').val(event.data.habit.description);
+    $('#colour').val(event.data.habit.colour);
+
+    $(function() {
+        // make submit button invisible
+        $('#btnsubmit').hide();
+        // make update button visible
+        $('#update').show();
+    });
+
+
+    $('#update').click({ id: event.data.habit._id }, updateHabit);
 }
 
 function updateHabit(event) {
     event.preventDefault();
+    var $id = event.data.id;
+    var $name = $('#name').val();
+    var $description = $('#desc').val();
+    var $colour = $('#colour').val();
 
-    var id = event.data.id;
-    $('#name').val();
-
-    
+    $.ajax({
+        method: "PUT",
+        url: "/api/habit",
+        data: { id: $id,
+                name: $name,
+                description: $description,
+                colour: $colour,
+        }
+    }).done(function() {
+       
+        console.log("succes update");
+    })
 }
