@@ -28,7 +28,8 @@ app.get('/api/habit', function(req, res) { // app.get - reading
 app.post('/api/habit', function(req,res) {
     console.log(req.body);
     Habit.create({name: req.body.name,
-                description: req.body.description,
+                startdate: req.body.startdate,
+                enddate: req.body.enddate,
                 colour: req.body.colour },function(err,habits){
         if(err) throw err;
         res.send();
@@ -44,10 +45,12 @@ app.delete('/api/habit',function(req,res){
 
 app.put('/api/habit',function(req,res){
     console.log(req.body);
+    console.log(req.body.startdate);
     Habit.findByIdAndUpdate({_id: req.body.id},
         {name: req.body.name,
-        description: req.body.description,
-        colour: req.body.colour},function(err,habits){
+         startdate: req.body.startdate,
+         enddate: req.body.enddate,
+         colour: req.body.colour},function(err,habits){
                                                     if(err) throw err;
         res.send();
     });

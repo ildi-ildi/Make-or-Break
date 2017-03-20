@@ -1,0 +1,19 @@
+
+/* hide the number next to the slidebar */
+.full-width-slider input {
+    display: none;
+}
+
+.full-width-slider .ui-slider-track {
+    margin-left: 2%;
+    margin-right: 2%;
+    width: auto;
+}
+
+.ui-grid-a .ui-block-a{
+    width: 80%;
+}
+
+.ui-grid-a .ui-block-b{
+    width: 20%;
+}

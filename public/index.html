@@ -14,56 +14,96 @@
     <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
     <script src="habit-app.js"></script>
+    <link rel="stylesheet" href="stylesheet-app.css"/>
+
 </head>
 
 <body>
-
-<div data-role="page">
+<!--HOME PAGE-->
+<div data-role="page" data-theme="a" id="home">
+    <!--HOME PAGE HEADER-->
     <div data-role="header">
-        <h1>Text Inputs</h1>
-    </div>
+        <h1>Make or Break Habit</h1>
+        <a href="#add-habit" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-left" >To table</a>
 
-    <div data-role="main" class="ui-content">
+    </div>
+    <!--HOME PAGE BODY-->
+    <div data-role="content" class="ui-content">
 
         <form>
 
             <div class="ui-field-contain">
-
-                <label for="name">Name:</label>
-                <input type="text" name="name" id="name">
-
-                <label for="desc">Description:</label>
-                <input type="text" name="des" id="desc">
-
-                <label for="colour">Colour:</label>
-                <input type="text" name="colour" id="colour">
-
+                <ul data-role="listview" class="ui-listview" >
+                    <li data-role="fieldcontain" class="ui-field-contain ui-body ui-br ui-li ui-li-static ui-body-c">
+                        <label for="name">Name:</label>
+                        <input type="text" name="name" id="name">
+                    </li>
+                    <li data-role="fieldcontain" class="ui-field-contain ui-body ui-br ui-li ui-li-static ui-body-c">
+                        <label for="start-date">Start Date:</label>
+                        <input type="date" name="des" id="start-date">
+                    </li>
+                    <li data-role="fieldcontain" class="ui-field-contain ui-body ui-br ui-li ui-li-static ui-body-c">
+                        <label for="end-date">End Date:</label>
+                        <input type="date" name="des" id="end-date">
+                    </li>
+                    <li data-role="fieldcontain" class="ui-field-contain ui-body ui-br ui-li ui-li-static ui-body-c">
+                        <label for="colour">Colour:</label>
+                        <input type="color" name="colour" id="colour">
+                    </li>
+                </ul>
             </div>
+
             <div id="btnsubmit">
-            <input type="submit" data-inline="true" value="Submit" >
+                <input type="submit" data-inline="true" value="Submit" >
             </div>
             <div id="btnedit">
-            <input type="button" data-inline="true" value="Update" id="update" >
+                <input type="button" data-inline="true" value="Update" id="update" >
             </div>
         </form>
-
-        <table data-role="table" class="ui-responsive ui-shadow" >
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Colour</th>
-                    <th>Delete?</th>
-                    <th>Update?</th>
-                </tr>
-            </thead>
-
-            <tbody id="habitfill"></tbody>
-
-        </table>
-
+    </div>
+    <!--HOME PAGE FOOTER-->
+    <div data-role="footer" data-position="fixed" class="ui-bar">
+        <p> Something here...</p>
     </div>
 </div>
+
+<!--ADD HABIT PAGE-->
+<div data-role="page" id="add-habit">
+    <!--ADD PAGE HEADER-->
+    <div data-role="header">
+        <h1>Edit or Add Habit</h1>
+        <!--Back button-->
+        <a href="#" data-rel="back" data-icon="back" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-left" >Back</a>
+    </div>
+    <!--ADD PAGE BODY-->
+            <ul data-role="listview" class="ui-listview" id="habitfill">
+                <li class="ui-btn ui-corner-all ui-icon-cloud ui-btn-icon-left" class="cloud"></li>
+
+                <!--
+                <li class="full-width-slider">
+                    <input type="range" id="slider" value="0" min="-5" max="5"/>
+
+                        <fieldset data-role="collapsible">
+                            <legend>Options</legend>
+                            <div data-role="controlgroup">
+                                <a href="#" data-role="button">Edit</a>
+                                <a href="#" data-role="button">Delete</a>
+                                <a href="#" data-role="button">Report</a>
+                            </div>
+                        </fieldset>
+
+                    <h2 class="title-habit-display">Habit Name</h2>
+                </li>
+                -->
+            </ul>
+        </form>
+    </div>
+    <!--ADD PAGE FOOTER-->
+    <div data-role="footer" data-position="fixed">
+        <h4>Something here again</h4>
+    </div>
+</div>
+
 
 </body>
 

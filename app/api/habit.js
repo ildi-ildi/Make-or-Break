@@ -7,7 +7,8 @@ var Schema = mongoose.Schema;
 
 var habitSchema = new Schema({
     name: String,
-    description: String,
+    startdate: Date,
+    enddate: Date,
     colour: String
 });
 
