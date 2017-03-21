@@ -1,12 +1,20 @@
 /**
  * Created by ILDI on 11/03/2017.
  */
+//the slider should store data in the database,
+// - when (date) it was moved - showing it loaded date in that day
+// - to what value it is
+// - to update the value in case it moves multiple times in the day.
 
+// - after 24 hrs the slider should be back at 0
+//   - if it is in the same 24 hours, update the input
+
+// - silderDateLoaded - an array to load the input for that day
 
 $(document).ready(function() {
-       $('#btnedit').hide();
+    $('#btnedit').hide();
 
-    getHabit(); // loads everything
+    getHabit();
 
     $('form').submit(function (event) {
         event.preventDefault();
@@ -18,22 +26,20 @@ $(document).ready(function() {
             colour: $('#colour').val(),
         }, function () {
             getHabit();
-            name: $('#name').val('');
-            startdate: $('#start-date').val('');
-            enddate: $('#end-date').val('');
-            colour: $('#colour').val('');
+            $('#name').val('');
+            $('#start-date').val('');
+            $('#end-date').val('');
+            $('#colour').val('');
 
         })
     })
-
-
 });
 
 function getHabit(){
     $.getJSON( "/api/habit", function( data ) {
         var tableBody = $('#habitfill');
         tableBody.empty();
-        
+
         $.each(data.habits, function(idx, habit) {
             /*var tableRow = $('<tr id="' + habit._id + '"></tr>').appendTo(tableBody);
             $('<td>' + habit.name + '</td>').appendTo(tableRow);
@@ -55,13 +61,16 @@ function getHabit(){
 
             $('</div> </fieldset>').appendTo(listRow);
             $('<h2 class="title-habit-display">' + habit.name +' </h2> </li>').appendTo(listRow);
-                        
+
             /*var btnDeleteColumn = $('<td><button>Delete</button></td>').appendTo(listRow);
             btnDeleteColumn.find('button').click({ id: habit._id }, deleteHabit);
-            
+
             var btnEditColumn = $('<td><input type="button" value="Edit" id="edit"></td>').appendTo(listRow);
             btnEditColumn.find('input').click({ habit: habit }, editHabit);*/
+            //$().trigger("create");
         });
+        $('#add-habit').trigger("create");
+        $('#habitfill').listview('refresh');
     });
 }
 
@@ -77,39 +86,38 @@ function deleteHabit(event) {
         });
 }
 
+function formatDate(data){
+    var d_y =  new Date(data).getFullYear();
+    var d_m =  new Date(data).getMonth();
+    var d_d =  new Date(data).getDay();
+    if(d_m < 10){
+        d_m = "0" + d_m;
+    }
+    if(d_d < 10){
+        d_d = "0" + d_d
+    }
+    var d_full = d_y +"-"+ d_m +"-"+ d_d;
+
+    return d_full;
+}
+
 function editHabit(event) {
     // fill input box
     //$('#name').html(event.data.habit.name);
     // ...
     $('#name').val(event.data.habit.name);
-    var sd_y =  new Date(event.data.habit.startdate).getFullYear();
-    var sd_m =  new Date(event.data.habit.startdate).getMonth();
-    var sd_d =  new Date(event.data.habit.startdate).getDay();
-    if(sd_m < 10){
-        sd_m = "0" + sd_m;
-    }
-    if(sd_d < 10){
-        sd_d = "0" + sd_d
-    }
-    var sd_full = sd_y +"-"+ sd_m +"-"+ sd_d;
+
+    var sd_full = formatDate(event.data.habit.startdate);
     $('#start-date').val(sd_full);
-    var ed_y =  new Date(event.data.habit.enddate).getFullYear();
-    var ed_m =  new Date(event.data.habit.enddate).getMonth();
-    var ed_d =  new Date(event.data.habit.enddate).getDay();
-    if(ed_m < 10){
-        ed_m = "0" + ed_m;
-    }
-    if(ed_d < 10){
-        ed_d = "0" + ed_d
-    }
-    var ed_full = ed_y +"-"+ ed_m +"-"+ ed_d;
+
+    var ed_full = formatDate(event.data.habit.enddate);
     $('#end-date').val(ed_full);
     $('#colour').val(event.data.habit.colour);
 
-        // make submit button invisible
-        $('#btnsubmit').hide();
-        // make update button visible
-        $('#btnedit').show();
+    // make submit button invisible
+    $('#btnsubmit').hide();
+    // make update button visible
+    $('#btnedit').show();
 
     $('#update').click({ id: event.data.habit._id }, updateHabit);
 }
@@ -133,13 +141,14 @@ function updateHabit(event) {
         }
     }).done(function() {
         getHabit();
+
         $('#btnedit').hide();
         $('#btnsubmit').show();
 
-        name: $('#name').val('');
-        startdate: $('#start-date').val('');
-        enddate: $('#end-date').val('');
-        colour: $('#colour').val('');
+        $('#name').val('');
+        $('#start-date').val('');
+        $('#end-date').val('');
+        $('#colour').val('');
 
         console.log("succes update");
     })
