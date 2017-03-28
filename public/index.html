@@ -23,7 +23,7 @@
 <!--HOME PAGE-->
 <div data-role="page" data-theme="a" id="home">
     <!--HOME PAGE HEADER-->
-    <div data-role="header" >
+    <div data-role="header" data-position="fixed">
         <h1>Make or Break Habit</h1>
         <a href="#add-habit" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-left" >To table</a>
     </div>
@@ -62,15 +62,15 @@
     </div>
 
     <!--HOME PAGE FOOTER-->
-    <div data-role="footer" data-position="fixed" class="ui-bar">
-        <p> Something here...</p>
+    <div data-role="footer" data-position="fixed" >
+        <h4> Something here...</h4>
     </div>
 </div>
 
 <!--ADD HABIT PAGE-->
-<div data-role="page" id="add-habit">
+<div data-role="page" id="add-habit" data-theme="a">
     <!--ADD PAGE HEADER-->
-    <div data-role="header" >
+    <div data-role="header" data-position="fixed">
         <h1>Edit or Add Habit</h1>
         <!--Back button-->
         <a href="#home" data-icon="back" class="ui-btn ui-corner-all ui-icon-carat-l ui-btn-icon-left" >Back</a>
@@ -84,7 +84,7 @@
     </div>
 
     <!--ADD PAGE FOOTER-->
-    <div data-role="footer" data-position="fixed">
+    <div data-role="footer" data-position="fixed" >
         <h4>Something here again</h4>
     </div>
 </div>

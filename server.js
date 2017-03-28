@@ -4,6 +4,7 @@
 
 var express = require('express');
 var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 var bodyParser = require('body-parser');
 var app = express();
 var path = require('path');
@@ -14,7 +15,7 @@ var Habit = require('./app/api/habit.js');
 app.use(express.static(path.join(__dirname,"public")));
 app.use(bodyParser());
 
-// viewed at http://localhost:8080
+
 app.get('/api/habit', function(req, res) { // app.get - reading
 
     Habit.find({}, function(err,habits) {
@@ -25,7 +26,7 @@ app.get('/api/habit', function(req, res) { // app.get - reading
     });
 });
 
-app.post('/api/habit', function(req,res) {
+app.post('/api/habit', function(req,res) { // create
     console.log(req.body);
     Habit.create({name: req.body.name,
                 startdate: req.body.startdate,
@@ -56,8 +57,8 @@ app.put('/api/habit',function(req,res){
     });
 });
 
-mongoose.connect('mongodb://localhost/habitdb').then(function () {
-    app.listen(8080);
+mongoose.connect('mongodb://ildiko1:thisisthat@ds137230.mlab.com:37230/habit_data').then(function () {
+    app.listen(80);
 }).catch(function (err) {
     console.error(err);
 });
